@@ -1,0 +1,17 @@
+{
+  "name": "setter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@aws-sdk/client-scheduler": "^3.839.0",
+    "date-fns": "^4.1.0"
+  }
+}
