@@ -9,11 +9,39 @@ This project deploys two Lambda functions orchestrated by AWS EventBridge Schedu
 1. **Setter Lambda** - Receives scheduling requests via HTTP and creates one-time EventBridge schedules
 2. **Worker Lambda** - Executes the actual webhook calls when the scheduled time arrives
 
-```text
-┌─────────────┐      ┌─────────────────┐      ┌─────────────────────┐      ┌──────────────┐
-│   Client    │ ──▶  │  Setter Lambda  │ ──▶  │ EventBridge Scheduler│ ──▶  │ Worker Lambda│ ──▶ Target URL
-│  (HTTP POST)│      │  (Function URL) │      │   (One-time schedule)│      │  (Webhook)   │
-└─────────────┘      └─────────────────┘      └─────────────────────┘      └──────────────┘
+```mermaid
+flowchart LR
+    subgraph Client
+        A[HTTP POST]
+    end
+
+    subgraph Setter
+        B[Lambda Function URL]
+    end
+
+    subgraph Scheduler
+        C[EventBridge One-time Schedule]
+    end
+
+    subgraph Worker
+        D[Lambda Webhook]
+    end
+
+    subgraph Target
+        E[Target URL]
+    end
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+
+    %% 🎨 Styling
+    style Client fill:#f9f,stroke:#333,stroke-width:2px
+    style Setter fill:#ffa500,stroke:#333,stroke-width:2px
+    style Worker fill:#ffa500,stroke:#333,stroke-width:2px
+    style Scheduler fill:#ff00ff,stroke:#333,stroke-width:2px
+    style Target fill:#00ff00,stroke:#333,stroke-width:2px
 ```
 
 ## Prerequisites
